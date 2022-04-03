@@ -44,7 +44,6 @@ class LaundrySpider(scrapy.Spider):
             ordered_at = reservation.css(
                 'td:nth-of-type(4)::text').get().strip()
 
-            print(ordered_at)
             loader = ItemLoader(item=ReservationItem(), selector=reservation)
             loader.add_value('reserved_at', parser.parse(reserved_at))
             loader.add_css('group', 'td:nth-of-type(3)::text')

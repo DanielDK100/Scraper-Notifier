@@ -20,6 +20,8 @@ projects
 logs
 
 settings.py
+credentials.json
+token.json
 
 # Windows
 Thumbs.db
