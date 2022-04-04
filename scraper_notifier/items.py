@@ -10,16 +10,20 @@ from scrapy.loader.processors import MapCompose, TakeFirst, Identity
 from w3lib.html import remove_tags
 
 
-class ReservationItem(scrapy.Item):
-    reserved_at = scrapy.Field(
+class EventItem(scrapy.Item):
+    type = scrapy.Field(
         input_processor=Identity(),
         output_processor=TakeFirst()
     )
-    group = scrapy.Field(
+    location = scrapy.Field(
+        input_processor=Identity(),
+        output_processor=TakeFirst()
+    )
+    event_at = scrapy.Field(
+        input_processor=Identity(),
+        output_processor=TakeFirst()
+    )
+    summary = scrapy.Field(
         input_processor=MapCompose(remove_tags, str.strip),
-        output_processor=TakeFirst()
-    )
-    ordered_at = scrapy.Field(
-        input_processor=Identity(),
         output_processor=TakeFirst()
     )

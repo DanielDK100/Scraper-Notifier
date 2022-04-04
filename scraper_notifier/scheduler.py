@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import time
 import os
-import scrapy
 import sys
 from scraper_notifier.helpers.refresh_token_helper import RefreshTokenHelper
 from apscheduler.schedulers.background import BackgroundScheduler

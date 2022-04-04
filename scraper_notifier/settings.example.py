@@ -18,7 +18,12 @@ NEWSPIDER_MODULE = 'scraper_notifier.spiders'
 ENCRYPTION_KEY = ''
 
 # Personal login information
-LOGINS = []
+LOGINS = {
+    'service': {
+        'username': b"test",
+        'password': b"secretpassword",
+    },
+}
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'scraper_notifier (+http://www.yourdomain.com)'
@@ -76,7 +81,7 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'scraper_notifier.pipelines.ScraperNotifierPipeline': 300,
+    'scraper_notifier.pipelines.AddCalendarEvent': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

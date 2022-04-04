@@ -4,11 +4,10 @@ from scrapy.http import FormRequest
 from scrapy_splash import SplashRequest
 from scrapy.utils.response import open_in_browser
 from scrapy.loader import ItemLoader
-import requests
 from cryptography.fernet import Fernet
 from dateutil import parser
 from scraper_notifier.helpers.login_helper import LoginHelper
-from ..items import ReservationItem
+from ..items import EventItem
 
 
 class LaundrySpider(scrapy.Spider):
@@ -44,9 +43,10 @@ class LaundrySpider(scrapy.Spider):
             ordered_at = reservation.css(
                 'td:nth-of-type(4)::text').get().strip()
 
-            loader = ItemLoader(item=ReservationItem(), selector=reservation)
-            loader.add_value('reserved_at', parser.parse(reserved_at))
-            loader.add_css('group', 'td:nth-of-type(3)::text')
-            loader.add_value('ordered_at', parser.parse(ordered_at))
+            loader = ItemLoader(item=EventItem(), selector=reservation)
+            loader.add_value('type', 'lau')
+            loader.add_value('location', 'Degnestavnen, 2400 København NV')
+            loader.add_value('event_at', parser.parse(reserved_at, dayfirst=True))
+            loader.add_css('summary', 'td:nth-of-type(3)::text')
 
             yield loader.load_item()
