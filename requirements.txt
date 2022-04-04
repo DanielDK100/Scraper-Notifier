@@ -41,8 +41,6 @@ lazy-object-proxy==1.7.1
 lxml==4.8.0
 MarkupSafe==2.1.1
 mccabe==0.7.0
-mysql-connector==2.2.9
-mysqlclient==2.1.0
 oauthlib==3.2.0
 parsel==1.6.0
 pem==21.2.0
@@ -74,7 +72,6 @@ scrapy-splash==0.8.0
 scrapy-user-agents==0.1.1
 service-identity==21.1.0
 six==1.16.0
-SQLAlchemy==1.4.34
 tabulate==0.8.9
 tldextract==3.2.0
 toml==0.10.2

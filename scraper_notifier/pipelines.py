@@ -6,7 +6,6 @@
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 from ast import If, Try
 import os.path
-from tkinter import E
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 
