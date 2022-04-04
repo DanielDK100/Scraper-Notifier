@@ -22,6 +22,7 @@ logs
 settings.py
 credentials.json
 token.json
+proxies.txt
 
 # Windows
 Thumbs.db
