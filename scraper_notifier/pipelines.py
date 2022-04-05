@@ -12,7 +12,7 @@ from googleapiclient.discovery import build
 class AddCalendarEvent(object):
     def process_item(self, item, spider):
         SCOPES = ['https://www.googleapis.com/auth/calendar']
-        TIMEZONE = 'Europe/Copenhagen'
+        TIME_ZONE = 'Europe/Copenhagen'
 
         credentials = Credentials.from_authorized_user_file(os.path.dirname(os.path.abspath(__file__)) + '/token.json', SCOPES)
         service = build('calendar', 'v3', credentials=credentials)
@@ -23,11 +23,11 @@ class AddCalendarEvent(object):
             'location': item['location'],
             'start': {
                 'dateTime': item['event_at'].isoformat(),
-                'timeZone': TIMEZONE,
+                'timeZone': TIME_ZONE,
             },
             'end': {
                 'dateTime': (item['event_at'] + timedelta(hours=2)).isoformat(),
-                'timeZone': TIMEZONE,
+                'timeZone': TIME_ZONE,
             },
             'reminders': {
                 'useDefault': False,
