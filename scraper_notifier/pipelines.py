@@ -4,7 +4,7 @@
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-from ast import If, Try
+from datetime import timedelta
 import os.path
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
@@ -12,9 +12,10 @@ from googleapiclient.discovery import build
 class AddCalendarEvent(object):
     def process_item(self, item, spider):
         SCOPES = ['https://www.googleapis.com/auth/calendar']
+        TIMEZONE = 'Europe/Copenhagen'
 
-        creds = Credentials.from_authorized_user_file(os.path.dirname(os.path.abspath(__file__)) + '/token.json', SCOPES)
-        service = build('calendar', 'v3', credentials=creds)
+        credentials = Credentials.from_authorized_user_file(os.path.dirname(os.path.abspath(__file__)) + '/token.json', SCOPES)
+        service = build('calendar', 'v3', credentials=credentials)
 
         service.events().import_(calendarId='primary', body={
             'iCalUID': item['type'] + item['event_at'].strftime('%Y%m%d%H%M'),
@@ -22,11 +23,11 @@ class AddCalendarEvent(object):
             'location': item['location'],
             'start': {
                 'dateTime': item['event_at'].isoformat(),
-                'timeZone': 'Europe/Copenhagen',
+                'timeZone': TIMEZONE,
             },
             'end': {
-                'dateTime': item['event_at'].isoformat(),
-                'timeZone': 'Europe/Copenhagen',
+                'dateTime': (item['event_at'] + timedelta(hours=2)).isoformat(),
+                'timeZone': TIMEZONE,
             },
             'reminders': {
                 'useDefault': False,

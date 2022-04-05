@@ -17,7 +17,7 @@ start_date = '2020-01-01 00:00:00'
 
 
 scheduler.add_job(RefreshTokenHelper.refresh,
-                  'cron', day='last', start_date=start_date, id='refresh_token')
+                  'interval', hours=24, start_date=start_date, id='refresh_token')
 scheduler.add_job(os.system, 'interval', hours=3, jitter=two_minutes,
                   start_date=start_date, id='laundry', args=['scrapy crawl laundry'])
 
