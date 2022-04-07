@@ -14,23 +14,26 @@ class AddCalendarEvent(object):
         SCOPES = ['https://www.googleapis.com/auth/calendar']
         TIME_ZONE = 'Europe/Copenhagen'
 
-        credentials = Credentials.from_authorized_user_file(os.path.dirname(os.path.abspath(__file__)) + '/token.json', SCOPES)
-        service = build('calendar', 'v3', credentials=credentials)
+        try:
+            credentials = Credentials.from_authorized_user_file(os.path.dirname(os.path.abspath(__file__)) + '/token.json', SCOPES)
+            service = build('calendar', 'v3', credentials=credentials)
 
-        service.events().import_(calendarId='primary', body={
-            'iCalUID': item['type'] + item['event_at'].strftime('%Y%m%d%H%M'),
-            'summary': item['summary'],
-            'description': item['description'],
-            'start': { 'dateTime': item['event_at'].isoformat(), 'timeZone': TIME_ZONE },
-            'end': { 'dateTime': (item['event_at'] + timedelta(hours=2)).isoformat(), 'timeZone': TIME_ZONE },
-            'location': item['location'],
-            'reminders': {
-                'useDefault': False,
-                'overrides': [
-                    {'method': 'popup', 'minutes': 30},
-                    {'method': 'popup', 'minutes': 1440}
-                ],
-            },
-        }).execute()
+            service.events().import_(calendarId='primary', body={
+                'iCalUID': item['type'] + item['event_at'].strftime('%Y%m%d%H%M'),
+                'summary': item['summary'],
+                'description': item['description'],
+                'start': { 'dateTime': item['event_at'].isoformat(), 'timeZone': TIME_ZONE },
+                'end': { 'dateTime': (item['event_at'] + timedelta(hours=2)).isoformat(), 'timeZone': TIME_ZONE },
+                'location': item['location'],
+                'reminders': {
+                    'useDefault': False,
+                    'overrides': [
+                        {'method': 'popup', 'minutes': 30},
+                        {'method': 'popup', 'minutes': 1440}
+                    ],
+                },
+            }).execute()
+            return item
+        except:
+            print("Exception occured")
 
-        return item
