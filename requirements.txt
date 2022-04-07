@@ -21,7 +21,7 @@ dill==0.3.4
 distlib==0.3.4
 filelock==3.6.0
 google-api-core==2.7.1
-google-api-python-client==2.42.0
+google-api-python-client==2.43.0
 google-auth==2.6.2
 google-auth-httplib2==0.1.0
 google-auth-oauthlib==0.5.1
@@ -42,8 +42,10 @@ lxml==4.8.0
 MarkupSafe==2.1.1
 mccabe==0.7.0
 oauthlib==3.2.0
+packaging==21.3
 parsel==1.6.0
 pem==21.2.0
+pip-review==1.1.1
 platformdirs==2.5.1
 Protego==0.2.1
 protobuf==3.20.0
@@ -55,7 +57,7 @@ pycparser==2.21
 PyDispatcher==2.0.5
 PyHamcrest==2.0.3
 PyJWT==2.3.0
-pylint==2.13.4
+pylint==2.13.5
 pyOpenSSL==22.0.0
 pyparsing==3.0.7
 python-dateutil==2.8.2

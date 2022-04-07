@@ -20,15 +20,10 @@ class AddCalendarEvent(object):
         service.events().import_(calendarId='primary', body={
             'iCalUID': item['type'] + item['event_at'].strftime('%Y%m%d%H%M'),
             'summary': item['summary'],
+            'description': item['description'],
+            'start': { 'dateTime': item['event_at'].isoformat(), 'timeZone': TIME_ZONE },
+            'end': { 'dateTime': (item['event_at'] + timedelta(hours=2)).isoformat(), 'timeZone': TIME_ZONE },
             'location': item['location'],
-            'start': {
-                'dateTime': item['event_at'].isoformat(),
-                'timeZone': TIME_ZONE,
-            },
-            'end': {
-                'dateTime': (item['event_at'] + timedelta(hours=2)).isoformat(),
-                'timeZone': TIME_ZONE,
-            },
             'reminders': {
                 'useDefault': False,
                 'overrides': [

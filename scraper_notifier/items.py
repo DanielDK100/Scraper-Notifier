@@ -15,15 +15,19 @@ class EventItem(scrapy.Item):
         input_processor=Identity(),
         output_processor=TakeFirst()
     )
-    location = scrapy.Field(
-        input_processor=Identity(),
+    summary = scrapy.Field(
+        input_processor=MapCompose(remove_tags, str.strip),
+        output_processor=TakeFirst()
+    )
+    description = scrapy.Field(
+        input_processor=MapCompose(remove_tags, str.strip),
         output_processor=TakeFirst()
     )
     event_at = scrapy.Field(
         input_processor=Identity(),
         output_processor=TakeFirst()
     )
-    summary = scrapy.Field(
-        input_processor=MapCompose(remove_tags, str.strip),
+    location = scrapy.Field(
+        input_processor=Identity(),
         output_processor=TakeFirst()
     )

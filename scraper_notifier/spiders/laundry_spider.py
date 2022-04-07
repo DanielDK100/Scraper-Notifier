@@ -40,13 +40,12 @@ class LaundrySpider(scrapy.Spider):
             reserved_at = reservation.css(
                 'td > font:nth-of-type(1)::text').get().strip() + ' ' + reservation.css(
                 'td:nth-of-type(2)::text').get().strip().replace('kl. ', '')
-            ordered_at = reservation.css(
-                'td:nth-of-type(4)::text').get().strip()
 
             loader = ItemLoader(item=EventItem(), selector=reservation)
             loader.add_value('type', 'lau')
-            loader.add_value('location', 'Degnestavnen, 2400 København NV')
-            loader.add_value('event_at', parser.parse(reserved_at, dayfirst=True))
             loader.add_css('summary', 'td:nth-of-type(3)::text')
+            loader.add_value('description', 'td:nth-of-type(3)::text')
+            loader.add_value('event_at', parser.parse(reserved_at, dayfirst=True))
+            loader.add_value('location', 'Degnestavnen, 2400 København NV')
 
             yield loader.load_item()
